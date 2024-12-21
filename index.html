@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effet Plein Écran</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            flex-direction: column;
+        }
+        #button {
+            padding: 20px 40px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+        }
+        #button:active {
+            transform: scale(0.95);
+        }
+        #message {
+            display: none;
+            font-size: 32px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <button id="button">Aller sur le site</button>
+    <div id="message">Raped by apo</div>
+    <audio id="music" src="apomedia.mp3" preload="auto"></audio>
+
+    <script>
+        const button = document.getElementById('button');
+        const music = document.getElementById('music');
+        const message = document.getElementById('message');
+        
+        button.addEventListener('click', () => {
+            // Plein écran
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Safari
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE11
+                document.documentElement.msRequestFullscreen();
+            }
+
+            // Jouer la musique
+            music.play();
+
+            // Changer rapidement le fond
+            let isBlack = true;
+            setInterval(() => {
+                document.body.style.backgroundColor = isBlack ? 'white' : 'black';
+                isBlack = !isBlack;
+            }, 1); // Change toutes les 100ms
+
+            // Faire disparaître le bouton et afficher le message
+            button.style.display = 'none';
+            message.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
